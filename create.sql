@@ -1,0 +1,27 @@
+CREATE TABLE VIDEO (
+    video_id char(255) NOT NULL UNIQUE,
+    title char(255) NOT NULL,
+    publish_time TIMESTAMP NOT NULL );
+
+
+
+CREATE TABLE CHANNEL (
+    video_id char(255) NOT NULL UNIQUE,
+    channel_title char(255) NOT NULL);
+
+
+CREATE TABLE STATISTIC (
+    video_id char(255) NOT NULL,
+    viewse int NOT NULL,
+    comment_count int NOT NULL,
+    likes int NOT NULL,
+    dislikes int NOT NULL);
+
+
+ALTER TABLE video ADD CONSTRAINT VIDEO_pk PRIMARY KEY (video_id,publish_time);
+ALTER TABLE CHANNEL ADD CONSTRAINT CHANNEL_pk PRIMARY KEY (video_id);
+ALTER TABLE STATISTIC ADD CONSTRAINT STATISTICS_pk PRIMARY KEY (video_id);
+
+ALTER TABLE CHANNEL ADD CONSTRAINT CHANNEL_fk0 FOREIGN KEY (video_id) REFERENCES VIDEO(video_id);
+
+ALTER TABLE STATISTIC ADD CONSTRAINT STATISTICS_fk0 FOREIGN KEY (video_id) REFERENCES VIDEO(video_id);
